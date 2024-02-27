@@ -22,14 +22,13 @@ def is_prime(num):
     """
        функция для проверки входящих чисел на простое число
     """
-    if num > 1:
-        for i in range(2,int(num/2+1)):
-            if num % i == 0:
-                return False
-            else:
-                return True
-    else:
+    if num < 2:
         return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    else:
+        return True
 
 def filter_numbers(num_list, filter_type):
     """
@@ -41,6 +40,8 @@ def filter_numbers(num_list, filter_type):
     <<< [1, 3]
     >>> filter_numbers([2, 3, 4, 5], EVEN)
     <<< [2, 4]
+    >>> filter_numbers([7629, 77, 7485, 2229, 7235, 5705, 7437, 3101, 3333, 3265, 6085, 7205, 789, 4323, 7935, 8749, 3565, 5525, 4867, 9639, 3269, 705, 2629, 3117, 8911, 6499, 5565, 6911, 5437, 4285, 2421, 795, 5955, 3927, 247, 8285, 8067, 5583, 1193, 3885, 3229, 7007, 1079, 2371, 7343, 6545, 4135], PRIME)
+    <<< [6911, 5437, 1193, 3229, 2371]
     """
     if filter_type == ODD:
         return list(filter(lambda num: num % 2 != 0, num_list))
