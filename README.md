@@ -1,4 +1,4 @@
-# Python Basic Homeworks
+# Python Developer. Basic
 
 ## from Dmitry Kisel
 
