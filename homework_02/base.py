@@ -11,7 +11,7 @@ class Vehicle(ABC):
         self.fuel = fuel
         self.fuel_consumption = fuel_consumption
 
-    def start(self):
+    def start(self) -> None:
         '''метод start. При вызове этого метода необходимо проверить состояние started. И если не started, то нужно проверить, что топлива больше нуля, и обновить состояние started, иначе нужно выкинуть исключение exceptions.LowFuelError'''
         if not self.started:
             if self.fuel > 0:
@@ -19,9 +19,9 @@ class Vehicle(ABC):
         else:
             raise LowFuelError()
 
-    def move(self):
+    def move(self,distanse: int | float) -> None:
         '''метод move, который проверяет, что топлива достаточно для преодоления переданной дистанции (вплоть до полного расхода), и изменяет количество оставшегося топлива, иначе выкидывает исключение exceptions.NotEnoughFuel'''
-        full_need = self.weight * 0.1 * self.fuel_consumption
+        full_need = distanse * self.fuel_consumption
         if full_need <= self.fuel:
             self.fuel -= full_need
         else:
