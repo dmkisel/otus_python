@@ -3,7 +3,7 @@ from homework_02.exceptions import LowFuelError,NotEnoughFuel
 
 class Vehicle(ABC):
 
-    def __init__(self, weight=0, fuel=0, fuel_consumption=0):
+    def __init__(self, weight: int | float = 0, fuel: int | float = 0, fuel_consumption: int | float = 0):
         '''атрибуты weight, started, fuel, fuel_consumption со значениями по умолчанию
 добавьте инициализатор для установки weight, fuel, fuel_consumption'''
         self.weight = weight
@@ -17,7 +17,7 @@ class Vehicle(ABC):
             if self.fuel > 0:
                 self.started = True
         else:
-            LowFuelError()
+            raise LowFuelError()
 
     def move(self):
         '''метод move, который проверяет, что топлива достаточно для преодоления переданной дистанции (вплоть до полного расхода), и изменяет количество оставшегося топлива, иначе выкидывает исключение exceptions.NotEnoughFuel'''
@@ -25,9 +25,5 @@ class Vehicle(ABC):
         if full_need <= self.fuel:
             self.fuel -= full_need
         else:
-            NotEnoughFuel()
-
-
-
-
+            raise NotEnoughFuel()
 

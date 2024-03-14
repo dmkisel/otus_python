@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Engine:
-    volume: float
+    volume: int
     pistons: int
 
 
