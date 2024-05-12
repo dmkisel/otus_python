@@ -3,13 +3,18 @@
 """
 import aiohttp
 
-USERS_DATA_URL = "users"
-POSTS_DATA_URL = "posts"
-async def fetch_json(types,id):
-    url = f'https://jsonplaceholder.typicode.com/{types}/{id}/'
+USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users/"
+POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts/"
+async def fetch_users_data(id):
+    url = USERS_DATA_URL + str(id)
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             return await resp.json()
 
 
+async def fetch_posts_data(id):
+    url = POSTS_DATA_URL + str(id)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            return await resp.json()
 

@@ -13,10 +13,11 @@
 - закрытие соединения с БД
 """
 import asyncio
-import models
+from models import Base, async_engine
+
 
 async def async_main():
-
+    await Base.metadata.create_all(async_engine)
     pass
 
 
@@ -27,3 +28,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
