@@ -12,13 +12,16 @@
   (используйте полученные из запроса данные, передайте их в функцию для добавления в БД)
 - закрытие соединения с БД
 """
-
+import asyncio
+import models
 
 async def async_main():
+
     pass
 
 
 def main():
+    asyncio.run(async_main())
     pass
 
 
