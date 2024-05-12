@@ -17,8 +17,10 @@ from models import Base, async_engine
 
 
 async def async_main():
-    await Base.metadata.create_all(async_engine)
-    pass
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+
 
 
 def main():
