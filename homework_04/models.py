@@ -24,11 +24,11 @@ class User(Base):
     name = Column(String)
     username = Column(String)
     email = Column(String)
-    link_posts = relationship('Post')
+    posts = relationship('Post')
 
 class Post(Base):
     __tablename__ = 'posts'
     user_id = Column(Integer, ForeignKey('users.id'))
     title = Column(String)
     body = Column(String)
-    link_user = relationship('User')
+    user = relationship('User')
