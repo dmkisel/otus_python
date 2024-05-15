@@ -36,4 +36,4 @@ class Post(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     title = Column(String)
     body = Column(String)
-    user = relationship('User')
+    user = relationship('User',overlaps="posts")
