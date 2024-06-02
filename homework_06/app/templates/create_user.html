@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+        <title>Создние клиента</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+           <form action="" method="post">
+
+                {{ form.csrf_token() }}
+
+                {% for field in form if field.name != "csrf_token" %}
+                <p>{{ field.label() }}</p>
+                <p>{{ field }}
+                    {% for error in field.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endfor %}
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
