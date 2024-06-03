@@ -23,16 +23,16 @@ services:
       dockerfile: ./Dockerfile
       context: ./
     environment:
-      DATABASE_URI: "postgresql+psycopg://user:example@pg:5432/blog"
-#    command:
-#      - flask
-#      - run
+      DATABASE_URI: "postgresql+pg8000://user:example@pg:5432/blog"
+    command:
+      - "flask"
+      - "db"
+      - "upgrade"
+      - "head"
     ports:
       - "8000:8000"
-#    entrypoint:
-#      - bash
-#      - "entrypoint.sh"
-#    network_mode: host
+    entrypoint:
+      ["flask", "run", "-h", "0.0.0.0", "-p", "8000"]
     depends_on:
       pg:
         condition: service_healthy

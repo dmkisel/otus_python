@@ -15,9 +15,9 @@ from forms import UserForm, PostForm
 
 app = Flask(__name__)
 
-app.config.update(SQLALCHEMY_DATABASE_URI='postgresql+pg8000://user:example@localhost:5432/blog',
+app.config.update(SQLALCHEMY_DATABASE_URI='postgresql+pg8000://user:example@pg:5432/blog',
                   SECRET_KEY='development key',
-                  SQLALCHEMY_ECHO=True)
+                  SQLALCHEMY_ECHO=False)
 
 db.init_app(app)
 migrate = Migrate(app, db)
