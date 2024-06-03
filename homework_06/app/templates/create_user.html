@@ -9,18 +9,24 @@
     <div class="row">
         <div class="col">
            <form action="" method="post">
-
                 {{ form.csrf_token() }}
-
-                {% for field in form if field.name != "csrf_token" %}
-                <p>{{ field.label() }}</p>
-                <p>{{ field }}
-                    {% for error in field.errors %}
-                    {{ error }}
+               <div class="input-group mb-3">
+                {{ form.username.label(class="input-group-text") }}
+                {{ form.username(class="form-control") }}
+               </div>
+               <div class="input-group mb-3">
+                   {{ form.name.label(class="input-group-text") }}
+                   {{ form.name(class="form-control") }}
+               </div>
+               <div class="input-group mb-3">
+                   {{ form.email.label(class="input-group-text") }}
+                   {{ form.email(class="form-control") }}
+               </div>
+               <button type="submit" class="btn btn-primary">Отправить</button>
+                    {% for error in form.errors %}
+                        {{ error }}
                     {% endfor %}
                 </p>
-                {% endfor %}
-
             </form>
         </div>
     </div>

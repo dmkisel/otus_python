@@ -11,7 +11,7 @@ from sqlalchemy import select
 from models import db
 from models import User
 from models import Post
-from forms import UserForm,PostForm
+from forms import UserForm, PostForm
 
 app = Flask(__name__)
 
@@ -25,21 +25,37 @@ migrate = Migrate(app, db)
 
 @app.get('/')
 def index():
-    stmt = (select(User.name,User.email, User.username))
-    users = db.session.scalars(stmt)
+    users = User.query.all()
     return render_template('index.html', users=users)
 
 
-@app.route('/add/', methods=['GET', 'POST'])
+@app.route('/create_user/', methods=['GET', 'POST'])
 def create_user():
     user_form = UserForm()
     if user_form.validate_on_submit():
         db.session.add(User(username=user_form.username.data,
-                             email=user_form.email.data,
-                             name=user_form.name.data))
+                            email=user_form.email.data,
+                            name=user_form.name.data))
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('create_user.html', form=user_form)
+
+
+@app.route('/create_post/<user>/', methods=['GET', 'POST'])
+def create_post(user):
+    post_form = PostForm()
+    if post_form.validate_on_submit():
+        user_id = User.query.filter_by(name=user).first().id
+        db.session.add(Post(author=user,
+                            title=post_form.title.data,
+                            body=post_form.body.data,
+                            user_id=user_id,
+                            ))
+        db.session.commit()
+        return redirect(url_for('view_posts',user=user))
+    return render_template('create_post.html',user=user, form=post_form)
+
+
 
 @app.get('/view_post/')
 @app.get('/view_post/<user>/')
@@ -47,20 +63,12 @@ def view_posts(user=None):
     if user is None:
         posts = Post.query.all()
     else:
-        posts = Post.query.join(User).join(User.id).filter(User.name == user).all()
-    return render_template('views_post.html', posts=posts, user=user)
+        posts = Post.query.filter_by(author=user).all()
+    return render_template('views_post.html', posts=posts)
 
-@app.route('/add/', methods=['GET', 'POST'])
-def create_post():
-    post_form = PostForm()
-    if post_form.validate_on_submit():
-        db.session.add(Post(title=post_form.title.data,
-                            body=post_form.body.data,
-                            author=post_form.author.data,
-                            ))
-        db.session.commit()
-        return redirect(url_for('views_post.html'))
-    return render_template('create_post.html', form=post_form)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
