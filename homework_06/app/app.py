@@ -15,13 +15,12 @@ from forms import UserForm, PostForm
 
 app = Flask(__name__)
 
-app.config.update(SQLALCHEMY_DATABASE_URI='postgresql+pg8000://user:example@pg:5432/blog',
+app.config.update(SQLALCHEMY_DATABASE_URI='postgresql+psycopg://user:example@pg:5432/blog',
                   SECRET_KEY='development key',
                   SQLALCHEMY_ECHO=False)
 
 db.init_app(app)
 migrate = Migrate(app, db)
-
 
 @app.get('/')
 def index():
@@ -71,4 +70,4 @@ def view_posts(user=None):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0',port=5000)

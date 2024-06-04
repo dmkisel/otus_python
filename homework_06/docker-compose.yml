@@ -22,17 +22,15 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: ./
-    environment:
-      DATABASE_URI: "postgresql+pg8000://user:example@pg:5432/blog"
+  #  environment:
+  #    DATABASE_URI: "postgresql+pg8000://user:example@pg:5432/blog"
     command:
-      - "flask"
-      - "db"
-      - "upgrade"
-      - "head"
+      #["python", "app.py"]
+      ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
     ports:
-      - "8000:8000"
-    entrypoint:
-      ["flask", "run", "-h", "0.0.0.0", "-p", "8000"]
+      - "5000:5000"
+    #entrypoint:
+      #["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
     depends_on:
       pg:
         condition: service_healthy
