@@ -25,8 +25,8 @@ services:
   #  environment:
   #    DATABASE_URI: "postgresql+pg8000://user:example@pg:5432/blog"
     command:
-      #["python", "app.py"]
-      ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
+      ["python", "app.py"]
+      #["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
     ports:
       - "5000:5000"
     #entrypoint:
