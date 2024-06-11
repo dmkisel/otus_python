@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_DB: blog
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d blog -U user" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  app:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    ports:
+      - "5000:5000"
+      - "80:80"
+    depends_on:
+      pg:
+        condition: service_healthy
+
+volumes:
+  db-data:

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+        <title>Create post {{user}}</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Create post {{user}}</h2>
+    <div class="row">
+        <div class="col">
+             <form action="" method="post">
+                {{ form.csrf_token() }}
+               <div class="input-group mb-3">
+                   {{ form.title.label(class="input-group-text") }}
+                   {{ form.title(class="form-control") }}
+               </div>
+               <div class="input-group mb-3">
+                   {{ form.body.label(class="input-group-text") }}
+                   {{ form.body(class="form-control") }}
+               </div>
+               <button type="submit" class="btn btn-primary">Отправить</button>
+                    {% for error in form.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </p>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
