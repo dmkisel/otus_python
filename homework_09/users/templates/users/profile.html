@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Профиль, {{ user.name }}
+{% endblock %}
+
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <p class="card-end"> {{ user.name }} </p>
+                                    <h5 class="card-title">{{ user.username }}</h5>
+                                    <p class="card-text">{{ user.address }}</p>
+                                    <p class="card-text">{{ user.phone }}</p>
+                                    <p class="card-text">{{ user.telegram }}</p>
+                                    <div class="btn-group">
+                                        <form method="post" action="{% url 'users:logout' %}">
+                                              {% csrf_token %}
+                                              <button class="btn" type="submit">Выход</button>
+                                          </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
