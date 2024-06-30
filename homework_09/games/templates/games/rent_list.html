@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All Games
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+        {% for game in object_list %}
+            <div class="col-lg-3 mt-3 col-md-6 mt-3 row-sm">
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ game.name }}</h5>
+                                <p class="card-text">{{ game.category }}</p>
+                                <p class="card-text"><small class="text-muted">Игроков: {{ game.min_players }} - {{ game.max_players }}</small></p>
+                                <div class="btn-group-md-3 btn-group-sm">
+                                    <a href="{% url 'games:detail' pk=game.pk %}" class="btn btn-link">
+                                        Подробнее
+                                    </a>
+                                    <a href="{% url 'games:update' pk=game.pk %}" class="btn btn-link">
+                                        Редактировать
+                                    </a>
+                                    <a href="{% url 'games:delete' pk=game.pk %}" class="btn btn-link">
+                                        Удалить
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

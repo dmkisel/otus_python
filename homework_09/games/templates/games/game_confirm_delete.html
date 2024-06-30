@@ -1,0 +1,7 @@
+{% block main %}
+    Подтвердите удаление
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Да</button>
+    </form>
+{% endblock %}
